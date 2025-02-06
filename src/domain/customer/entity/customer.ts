@@ -1,3 +1,4 @@
+import CustomerChangedAddressEvent from "../event/customer-changed-address.event";
 import Address from "../value-object/address";
 
 export default class Customer {
@@ -49,6 +50,12 @@ export default class Customer {
   
   changeAddress(address: Address) {
     this._address = address;
+    
+    new CustomerChangedAddressEvent({
+      id: this._id,
+      name: this._name,
+      address: this._address.toString()
+    });
   }
 
   isActive(): boolean {
