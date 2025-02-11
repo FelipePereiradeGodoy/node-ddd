@@ -11,6 +11,7 @@ import Product from "../../../../domain/product/entity/product";
 import OrderItem from "../../../../domain/checkout/entity/order-item";
 import Order from "../../../../domain/checkout/entity/order";
 import Address from "../../../../domain/customer/value-object/address";
+import EventDispatcher from "../../../../domain/@shared/event/event-dispatcher";
 
 describe("Order repository test", () => {
   let sequelize: Sequelize;
@@ -38,7 +39,7 @@ describe("Order repository test", () => {
 
   it("should create a new order", async () => {
     const customerRepository = new CustomerRepository();
-    const customer = new Customer("123", "Customer 1");
+    const customer = new Customer("123", "Customer 1", new EventDispatcher());
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.changeAddress(address);
     await customerRepository.create(customer);
@@ -85,7 +86,7 @@ describe("Order repository test", () => {
   it("should update a order", async () => {
     const customerRepository = new CustomerRepository();
     
-    const customer = new Customer("123", "Customer 1");
+    const customer = new Customer("123", "Customer 1", new EventDispatcher());
 
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     customer.changeAddress(address);
@@ -141,7 +142,7 @@ describe("Order repository test", () => {
   it("should find one order", async () => {
     const customerRepository = new CustomerRepository();
     
-    const customer = new Customer("123", "Customer 1");
+    const customer = new Customer("123", "Customer 1", new EventDispatcher());
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     
     customer.changeAddress(address);
@@ -173,7 +174,7 @@ describe("Order repository test", () => {
   it("should find one order", async () => {
     const customerRepository = new CustomerRepository();
     
-    const customer = new Customer("123", "Customer 1");
+    const customer = new Customer("123", "Customer 1", new EventDispatcher());
     const address = new Address("Street 1", 1, "Zipcode 1", "City 1");
     
     customer.changeAddress(address);
