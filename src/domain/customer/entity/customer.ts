@@ -20,7 +20,9 @@ export default class Customer {
       "name": this._name
     });
 
-    this.eventDispatcher.notify(event);
+    if(this.eventDispatcher) {
+      this.eventDispatcher.notify(event);
+    }
   }
 
   get id(): string {
@@ -66,7 +68,9 @@ export default class Customer {
       address: this._address.toString()
     });
 
-    this.eventDispatcher.notify(event);
+    if(this.eventDispatcher) {
+      this.eventDispatcher.notify(event);
+    }
   }
 
   isActive(): boolean {
