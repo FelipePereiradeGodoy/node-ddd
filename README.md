@@ -1,2 +1,1 @@
-# node-ddd
-# node-clean-arch
+# node-ddd-clean-arch
