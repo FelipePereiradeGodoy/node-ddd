@@ -51,6 +51,15 @@ describe('E2E test for customer API', () => {
         expect(response.body.customers[1].address.street).toBe('2 Main St');
         expect(response.body.customers[1].address.number).toBe(2);
 
+
+        const listResponseXML = await request(app)
+        .get("/customer")
+        .set("Accept", "application/xml")
+        .send();
+    
+        expect(listResponseXML.status).toBe(200);
+        expect(listResponseXML.text).toContain(`<?xml version="1.0" encoding="UTF-8"?>`);
+
         await CustomerModel.destroy({ where: { id: '1' } });
         await CustomerModel.destroy({ where: { id: '2' } });
     });
