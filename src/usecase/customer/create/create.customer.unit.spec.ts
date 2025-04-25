@@ -1,4 +1,6 @@
+import { Not } from "sequelize-typescript";
 import CreateCustomerUseCase from "./create.customer.usecase";
+import NotificationError from "../../../domain/@shared/notification/notification.error";
 
 const input = {
     name: 'John',
@@ -49,6 +51,6 @@ describe('Unit Test create customer use case', () => {
             name: '',
         };
 
-        await expect(usecase.execute(inputWithoutName)).rejects.toThrow('Name is required');
+        await expect(usecase.execute(inputWithoutName)).rejects.toThrow('customer: Name is required');
     });
 });

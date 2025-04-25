@@ -11,13 +11,19 @@ describe('Customer uni test', () => {
     it('should throw error when id is empty', () => {
         expect(() => {
             new Customer("", "John", new EventDispatcher());
-        }).toThrow();
+        }).toThrow('customer: Id is required');
     });
 
     it('should throw error when name is empty', () => {
         expect(() => {
             new Customer("123", "", new EventDispatcher());
-        }).toThrow();
+        }).toThrow('customer: Name is required');
+    });
+
+    it('should throw error when name is and id are empty', () => {
+        expect(() => {
+            new Customer("", "", new EventDispatcher());
+        }).toThrow('customer: Id is required, customer: Name is required');
     });
 
     it('should change name', () => {
@@ -40,7 +46,7 @@ describe('Customer uni test', () => {
     it('should throw error when address is undefined when you activate a customer', () => {
         const customer = new Customer("123", "Customer 1", new EventDispatcher());
         
-        expect(() => customer.activate()).toThrow();
+        expect(() => customer.activate()).toThrow('Address is mandatory to activate a customer');
     });
 
     it('should deactivate customer', () => {

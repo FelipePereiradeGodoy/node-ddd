@@ -7,7 +7,7 @@ import CustomerModel from "./customer.model";
 export default class CustomerRepository implements CustomerRepositoryInterface {
   async create(entity: Customer): Promise<void> {
     await CustomerModel.create({
-      id: entity.id,
+      id: entity.getId(),
       name: entity.name,
       street: entity.Address.street,
       number: entity.Address.number,
@@ -31,7 +31,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
       },
       {
         where: {
-          id: entity.id,
+          id: entity.getId(),
         },
       }
     );

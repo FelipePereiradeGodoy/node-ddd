@@ -17,7 +17,7 @@ export default class UpdateCustomerUseCase {
         await this.customerRepository.update(customer);
 
         return {
-            id: customer.id,
+            id: customer.getId(),
             name: customer.name,
             address: {
                 street: customer.address.street,

@@ -5,7 +5,7 @@ describe('Customer factory unit test', () => {
     it('should create a customer', () => {
         let customer = CustomerFactory.create("John");
 
-        expect(customer.id).toBeDefined();
+        expect(customer.getId()).toBeDefined();
         expect(customer.name).toBe("John");
         expect(customer.address).toBeUndefined();
     });
@@ -14,7 +14,7 @@ describe('Customer factory unit test', () => {
         const address = new Address("Street", 1, "13330-250", "São Paulo")
         let customer = CustomerFactory.createWithAddress("John", address);
 
-        expect(customer.id).toBeDefined();
+        expect(customer.getId()).toBeDefined();
         expect(customer.name).toBe("John");
         expect(customer.address).toBe(address);
     });

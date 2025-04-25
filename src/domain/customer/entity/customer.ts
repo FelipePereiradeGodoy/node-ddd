@@ -1,19 +1,25 @@
+import Entity from "../../@shared/entity/entity.abstract";
 import EventDispatcherInterface from "../../@shared/event/event-dispatcher.interface";
+import NotificationError from "../../@shared/notification/notification.error";
 import CustomerChangedAddressEvent from "../event/customer-changed-address.event";
 import CustomerCreatedEvent from "../event/customer-created.event";
 import Address from "../value-object/address";
 
-export default class Customer {
-  private _id: string;
+export default class Customer extends Entity {
   private _name: string = "";
   private _address!: Address;
   private _active: boolean = false;
   private _rewardPoints: number = 0;
 
   constructor(id: string, name: string, private readonly eventDispatcher: EventDispatcherInterface) {
+    super();
     this._id = id;
     this._name = name;
     this.validate();
+
+    if(this.notification.hasErrors()) {
+      throw new NotificationError(this.notification.getErrors());
+    }
 
     const event = new CustomerCreatedEvent({
       "id": this._id,
@@ -25,7 +31,7 @@ export default class Customer {
     }
   }
 
-  get id(): string {
+  getId(): string {
     return this._id;
   }
 
@@ -43,10 +49,16 @@ export default class Customer {
 
   validate() {
     if (this._id.length === 0) {
-      throw new Error("Id is required");
+      this.notification.addError({
+        message: "Id is required",
+        context: "customer"
+      });
     }
     if (this._name.length === 0) {
-      throw new Error("Name is required");
+      this.notification.addError({
+        message: "Name is required",
+        context: "customer"
+      });
     }
   }
 
